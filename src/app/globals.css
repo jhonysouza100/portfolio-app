@@ -3,25 +3,124 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --primary: hsl(207, 90%, 61%);
+  --primary-muted: hsl(207, 90%, 57%);
+  --foreground: hsl(207, 12%, 15%);
+  --foreground-muted: hsl(207, 12%, 45%);
+  --foreground-light: hsl(207, 8%, 75%);
+  --foreground-lighten: hsl(207, 8%, 92%);
+  --background: hsl(207, 100%, 99%);
+  --container: hsl(0, 0%, 100%);
 }
 
+/*========== Variables Dark theme ==========*/
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground: hsl(207, 12%, 95%);
+    --foreground-muted: hsl(207, 12%, 75%);
+    --foreground-light: hsl(207, 24%, 16%);
+    --foreground-lighten: hsl(208, 25%, 12%);
+    --background: hsl(207, 40%, 8%);
+    --container: hsl(207, 24%, 12%);
+  }
+}
+body.isDark {
+  --foreground: hsl(207, 12%, 95%);
+  --foreground-muted: hsl(207, 12%, 75%);
+  --foreground-light: hsl(207, 24%, 16%);
+  --foreground-lighten: hsl(208, 25%, 12%);
+  --background: hsl(207, 40%, 8%);
+  --container: hsl(207, 24%, 12%);
+}
+
+@layer components {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply text-[0.938rem] lg:text-base bg-background text-foreground-muted tracking-wide min-h-screen select-none antialiased transition-colors duration-300;
+  }
+  h1, h2, h3 {
+    @apply text-foreground font-semibold;
+  }
+  h2 {
+    @apply text-xl lg:text-2xl;
+  }
+  h3 {
+    @apply text-base lg:text-xl;
+  }
+  p {
+    @apply text-[0.813rem] lg:text-sm;
+  }
+  span {
+    @apply text-xs lg:text-[0.813rem];
+  }
+  .section-container {
+    @apply container mx-auto max-w-screen-lg px-4 sm:px-6;
+  }
+  .ripple {
+    @apply absolute bg-transparent animate-ripples -translate-x-[50%] -translate-y-[50%] rounded-full pointer-events-none;
+  }
+  .shading {
+    @apply absolute top-0 left-0 w-full h-full;
+    background: linear-gradient(180deg, hsla(0, 0%, 0%, 0) 50%, hsl(0, 0%, 0%) 125%);
+  }
+  .shading-2 {
+    background: linear-gradient(180deg, hsla(207, 24%, 40%, 0.3) 0%, hsla(207, 24%, 4%, 1) 95%);
+  }
+  .dark-filter {
+    background: #00000050;
+  }
+  .gradient-bg {
+    background: linear-gradient(180deg, hsla(207, 90%, 61%, 1) 0%, hsla(207, 90%, 61%, 0.2) 100%);
+  }
+  .shadow-blur {
+    box-shadow: 0 8px 24px hsla(207, 90%, 61%, 0.25);
+  }
+  .projects_content .projects_card:hover .projects_modal {
+    @apply bottom-0;
+  }
+  /* Hide and show projects & skills */
+  .filters [data-content] {
+    display: none;
+  }
+
+  .filters_active[data-content] {
+    display: grid;
+  }
+
+  /* Activate button filter */
+  .filters_content .filters_button.filter-tab-active {
+    @apply bg-background;
+  }
+
+  .button {
+    @apply py-[1.15rem] px-6 font-semibold inline-flex rounded-lg items-center justify-center gap-x-2 xl:gap-x-6 cursor-pointer relative overflow-hidden transition-all duration-300;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+
+/* persosonalize scroll bar */
+::-webkit-scrollbar {
+  width: .5rem;
+  border-radius: .5rem;
+  background-color: hsl(0, 0%, 10%);
+}
+::-webkit-scrollbar-thumb {
+  border-radius: .5rem;
+  background-color: hsl(0, 0%, 20%);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(0, 0%, 30%);
+}
+.isDark::-webkit-scrollbar {
+  background-color: hsl(207, 8%, 16%);
+}
+
+.isDark::-webkit-scrollbar-thumb {
+  background-color: hsl(207, 8%, 24%);
+}
+
+.isDark::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(207, 8%, 32%);
 }
